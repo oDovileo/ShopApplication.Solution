@@ -17,9 +17,10 @@ namespace ShopApplication.Project
             new Item("Juice", 2)
         };
                 
-        public bool Buy(string itemName)
+        public bool Buy(string itemName, int quantity)
         {
             Item item = Items.FirstOrDefault(i => i.Name == itemName); // is turimu item pasiima
+
             if (item == null)
             {
                 Console.WriteLine("-- This item does not exist");
@@ -27,23 +28,31 @@ namespace ShopApplication.Project
             }
             else
             {
-                if (Money >= item.Price)
+                if (Money >= item.Price * quantity)
                 {
-                    Money -= item.Price;
-                    Console.WriteLine("-- " + itemName + "Bought");
+                    Money -= item.Price * quantity;
+                    if (quantity == 1)
+                    {
+                        Console.WriteLine("-- " + itemName + "Bought");                        
+                    }
+                    else
+                    {
+                        Console.WriteLine("-- " + quantity + ' ' + itemName + "Bought");
+                    }
                     return true;
                 }
                 else
                 {
                     Console.WriteLine("-- Not enought money");
                     return false;
-                }
+                }               
             }
         }  
         public void Topup(string value)
         {
             
             Money = Money + Convert.ToInt32(value);
+            //Money += Convert.ToInt32(value)
             Console.WriteLine("Your e-money: " + Money);            
         }
     }   

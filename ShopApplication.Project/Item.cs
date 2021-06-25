@@ -18,10 +18,7 @@ namespace ShopApplication.Project
         public Item(string name, int price)
         {
             Name = name;
-            Price = price;
-           // quantity = Quantity + 1;
-            // Quantity = quantity;
-
+            Price = price;           
         }
     }
 }
